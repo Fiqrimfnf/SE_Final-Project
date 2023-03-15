@@ -1,0 +1,45 @@
+PROGRAM Sistem_kasir(memasukan_item_dan_auto_calculatetotalharga).
+
+START
+
+//inisialisasi variabel
+
+READ ABD WRITE "nama_pelanggan" with string
+READ AND WRITE "daftar_barang" with array dengan type data string
+READ AND WRITE "cart" with string
+READ AND WRITE "total_harga" with string
+
+//Simpan data
+
+STORE nama_pelanggan with string ""
+STORE daftar_barang with array ["sabun mandi": 3500, "sabun cuci": 5000, "sampo": 25000]
+STORE cart with string "0"
+STORE total_harga with string "0"
+
+// Fungsi untuk menambahkan barang ke cart
+
+function tambah_ke_cart(item, jumlah):
+    IF item dalam daftar_barang:
+        harga_per_item = daftar_barang[item]
+        harga_total = harga_per_item * jumlah
+        cart[item] = {"jumlah": jumlah, "harga_total": harga_total}
+        PRINT "Barang berhasil ditambahkan ke cart."
+    ELSE:
+        PRINT "Maaf, barang tidak ditemukan dalam daftar."
+END
+
+// Fungsi untuk menghitung total harga
+
+function hitung_total_harga():
+    total_harga = 0
+    FOR item, detail in cart.items():
+        total_harga = total_harga + detail["harga_total"]
+    PRINT "Total harga: ", total_harga
+
+END
+
+STORE bukti_pembelian
+	PRINT "nama_pelanggan+cart+total_harga"
+FINISH
+
+
